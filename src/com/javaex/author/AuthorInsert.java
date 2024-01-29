@@ -27,7 +27,22 @@ public class AuthorInsert {
 			conn = DriverManager.getConnection(url, id, pw);
 			*/
 		// 3. SQL문 준비 / 바인딩 / 실행
+			//SQL문 준비
+			String query="";
+			query += " insert into author ";	//자동 띄어쓰기 안되니 양끝 한 칸씩 띄기
+			query += " values (null, ?, ?) ";	//데이터가 오는 곳은 ? 표시
+												// ; 지우기
+			//바인딩 - ?에 실제값 매칭
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, "양정원");
+			pstmt.setString(2, "세고최계 리더");
+			
+			//실행
+			int count=pstmt.executeUpdate();
+			
 		// 4.결과처리
+			System.out.println(count+"건 등록 되었습니다.");
+			
 		} catch (ClassNotFoundException e) {
 		System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
